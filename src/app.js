@@ -16,10 +16,9 @@ app.get("/repositories", (request, response) => {
 
 app.post("/repositories", (request, response) => {
   const { title, url, techs } = request.body;
-  const id = uuid();
 
   const repository = {
-    id,
+    id: uuid(),
     title,
     url,
     techs,
@@ -38,7 +37,7 @@ app.put("/repositories/:id", (request, response) => {
   const repositoryIndex = repositories.findIndex(repo => repo.id === id);
 
   if(repositoryIndex < 0) {
-    return response.status(400).json({ error: 'The repository does not exist.' });
+    return response.status(400).json({ error: 'The repository does not exists.' });
   }
 
   repositories[repositoryIndex] = {
@@ -57,7 +56,7 @@ app.delete("/repositories/:id", (request, response) => {
   const repositoryIndex = repositories.findIndex(repo => repo.id === id);
 
   if(repositoryIndex < 0) {
-    return response.status(400).json({ error: 'The repository does not exist.' });
+    return response.status(400).json({ error: 'The repository does not exists.' });
   }
 
   repositories.splice(repositoryIndex, 1);
@@ -71,7 +70,7 @@ app.post("/repositories/:id/like", (request, response) => {
   const repositoryIndex = repositories.findIndex(repo => repo.id === id);
 
   if(repositoryIndex < 0) {
-    return response.status(400).json({ error: 'THe repository does not exist.' });
+    return response.status(400).json({ error: 'The repository does not exists.' });
   }
 
   repositories[repositoryIndex].likes += 1;
